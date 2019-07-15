@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The table associated with the model.
@@ -44,5 +45,10 @@ class User extends Authenticatable
         }else{
             return FALSE;
         }
+    }
+    
+    public function AauthAcessToken()
+    {
+        return $this->hasMany('App\OauthAccessToken');
     }
 }
